@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Program } from "../../features/programs/types/program.typs";
 
 type Props = {
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -19,11 +22,24 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
     };
   }, [isOpen]);
 
+  const handleEnroll = () => {
+    onClose();
+
+    navigate("/#enrollment");
+
+    setTimeout(() => {
+      const el = document.getElementById("enrollment");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
   if (!isOpen || !program) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50  mt-18 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 mt-18 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -90,7 +106,7 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleEnroll}
             className="mt-6 w-full rounded-xl bg-(--accent) px-6 py-3 text-sm font-semibold text-white transition hover:bg-(--accent-hover)"
           >
             Inscribirse en este programa
