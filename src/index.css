@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+html{
+    scroll-behavior: smoot;
+}
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+	--bg-primary: #f3f6f8;
+	--bg-secondary: #ffffff;
+	--bg-elevated: #f7fafc;
+	--text-primary: #112232;
+	--text-secondary: #4a5f71;
+	--text-muted: #6d8294;
+	--border-subtle: #d5e1ea;
+	--border-strong: #b8cad8;
+	--accent: #0059d6;
+	--accent-hover: #0048ad;
+	--accent-soft: #d8e8ff;
+	--surface-shadow: 0 12px 40px rgba(23, 46, 67, 0.08);
+	color-scheme: light;
+}
+
+.dark {
+	--bg-primary: #0f1b27;
+	--bg-secondary: #162534;
+	--bg-elevated: #1d3144;
+	--text-primary: #e7f0f8;
+	--text-secondary: #b6c8d8;
+	--text-muted: #8da4b8;
+	--border-subtle: #2c4357;
+	--border-strong: #40617c;
+	--accent: #5da8ff;
+	--accent-hover: #87bfff;
+	--accent-soft: #243f58;
+	--surface-shadow: 0 16px 44px rgba(0, 0, 0, 0.3);
+	color-scheme: dark;
+}
+
+body {
+	margin: 0;
+	font-family: "DM Sans", "Segoe UI", sans-serif;
+	background:
+		radial-gradient(circle at 15% 20%, rgba(0, 89, 214, 0.14) 0%, transparent 32%),
+		radial-gradient(circle at 85% 5%, rgba(50, 111, 176, 0.18) 0%, transparent 28%),
+		var(--bg-primary);
+	color: var(--text-primary);
+	min-height: 100vh;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Manrope", "Segoe UI", sans-serif;
+}
