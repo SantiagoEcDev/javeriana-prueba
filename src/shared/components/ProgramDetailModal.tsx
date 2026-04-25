@@ -24,7 +24,6 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
 
   const handleEnroll = () => {
     onClose();
-
     navigate("/#enrollment");
 
     setTimeout(() => {
@@ -38,10 +37,7 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
   if (!isOpen || !program) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 mt-18 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-999 flex items-start justify-center bg-black/60 p-4 pt-20 backdrop-blur-sm sm:items-center sm:pt-0">
       <div
         className="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-(--bg-primary) shadow-2xl md:flex-row"
         onClick={(e) => e.stopPropagation()}
@@ -54,7 +50,7 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
           ✕
         </button>
 
-        <div className="h-64 w-full md:h-auto md:w-1/2">
+        <div className="h-56 w-full sm:h-64 md:h-auto md:w-1/2">
           <img
             src={program.image}
             alt={program.title}
@@ -62,12 +58,12 @@ export const ProgramDetailModal = ({ program, isOpen, onClose }: Props) => {
           />
         </div>
 
-        <div className="flex max-h-[90vh] flex-1 flex-col overflow-y-auto p-6 md:p-8">
+        <div className="flex max-h-[90vh] flex-1 flex-col overflow-y-auto p-5 sm:p-6 md:p-8">
           <span className="text-xs font-bold uppercase tracking-[0.12em] text-(--accent)">
             {program.category}
           </span>
 
-          <h2 className="mt-2 text-2xl font-extrabold text-(--text-primary) md:text-3xl">
+          <h2 className="mt-2 text-xl font-extrabold text-(--text-primary) sm:text-2xl md:text-3xl">
             {program.title}
           </h2>
 

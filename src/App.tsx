@@ -6,7 +6,7 @@ import LeadsPage from "./app/pages/LeadsPage";
 function App() {
   return (
     <>
-      <Toaster />
+      <Toaster position="bottom-center" />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/leads" element={<LeadsPage />} />

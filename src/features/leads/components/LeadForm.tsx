@@ -45,7 +45,7 @@ export const LeadForm = ({
   const onSubmit = handleSubmit((values) => {
     const normalizedLead = normalizeLead(values);
 
-    if (leadExists(normalizedLead.email)) {
+    if (leadExists(normalizedLead.email, normalizedLead.programInterest)) {
       toast.error("Ya tienes un lead para este programa");
       return;
     }

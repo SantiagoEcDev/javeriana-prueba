@@ -12,7 +12,6 @@ const readStoredLeads = (): Lead[] => {
 
   try {
     const parsedLeads = JSON.parse(storedLeads) as Lead[];
-
     return Array.isArray(parsedLeads) ? parsedLeads : [];
   } catch {
     return [];
@@ -27,7 +26,7 @@ export const useLeadStorage = () => {
   }, [leads]);
 
   const addLead = useCallback((lead: Lead) => {
-    setLeads((currentLeads) => [lead, ...currentLeads]);
+    setLeads((current) => [lead, ...current]);
   }, []);
 
   const clearLeads = useCallback(() => {
@@ -35,14 +34,18 @@ export const useLeadStorage = () => {
   }, []);
 
   const leadExists = useCallback(
-    (email: string) => {
-      return leads.some((lead) => lead.email === email);
+    (email: string, programInterest: string) => {
+      return leads.some(
+        (lead) =>
+          lead.email === email &&
+          lead.programInterest === programInterest
+      );
     },
-    [leads],
+    [leads]
   );
 
   return useMemo(
     () => ({ leads, addLead, clearLeads, leadExists }),
-    [leads, addLead, clearLeads, leadExists],
+    [leads, addLead, clearLeads, leadExists]
   );
 };
