@@ -22,7 +22,10 @@ const DEFAULT_VALUES: LeadFormValues = {
   programInterest: "",
 };
 
-export const LeadForm = ({ programOptions, selectedProgram }: LeadFormProps) => {
+export const LeadForm = ({
+  programOptions,
+  selectedProgram,
+}: LeadFormProps) => {
   const { leads, addLead, leadExists } = useLeadStorage();
 
   const {
@@ -60,50 +63,64 @@ export const LeadForm = ({ programOptions, selectedProgram }: LeadFormProps) => 
   const leadCount = leads.length;
 
   return (
-    <section className="mt-12 rounded-2xl border border-(--border-subtle) bg-(--bg-secondary) p-6 shadow-(--surface-shadow)">
+    <section className="mt-12 rounded-2xl border border-(--border-subtle) bg-(--bg-secondary) p-4 sm:p-6 shadow-(--surface-shadow)">
       <div className="mb-6 flex flex-col gap-2">
         <p className="text-xs font-bold uppercase tracking-[0.12em] text-(--accent)">
           Captura de leads
         </p>
-        <h2 className="text-2xl font-bold text-(--text-primary)">
+        <h2 className="text-xl sm:text-2xl font-bold text-(--text-primary)">
           Inscripción de interesados
         </h2>
         <p className="max-w-2xl text-sm text-(--text-secondary)">
-          Completa el formulario para registrar prospectos. El correo debe pertenecer al dominio @javeriana.edu.co.
+          Completa el formulario para registrar prospectos. El correo debe
+          pertenecer al dominio @javeriana.edu.co.
         </p>
       </div>
 
-      <form onSubmit={onSubmit} className="grid gap-4 md:grid-cols-2">
-        <label className="flex flex-col gap-2 md:col-span-1">
-          <span className="text-sm font-semibold text-(--text-secondary)">Nombre completo</span>
+      <form
+        onSubmit={onSubmit}
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+      >
+        <label className="flex flex-col gap-2">
+          <span className="text-sm font-semibold text-(--text-secondary)">
+            Nombre completo
+          </span>
           <input
             type="text"
             placeholder="Ej. Ana María Pérez"
-            className="rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition placeholder:text-(--text-muted) focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
+            className="w-full rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition placeholder:text-(--text-muted) focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
             {...register("fullName")}
           />
-          {errors.fullName ? (
-            <span className="text-xs font-medium text-red-500">{errors.fullName.message}</span>
-          ) : null}
+          {errors.fullName && (
+            <span className="text-xs font-medium text-red-500">
+              {errors.fullName.message}
+            </span>
+          )}
         </label>
 
-        <label className="flex flex-col gap-2 md:col-span-1">
-          <span className="text-sm font-semibold text-(--text-secondary)">Correo institucional</span>
+        <label className="flex flex-col gap-2">
+          <span className="text-sm font-semibold text-(--text-secondary)">
+            Correo institucional
+          </span>
           <input
             type="email"
             placeholder="nombre@javeriana.edu.co"
-            className="rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition placeholder:text-(--text-muted) focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
+            className="w-full rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition placeholder:text-(--text-muted) focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
             {...register("email")}
           />
-          {errors.email ? (
-            <span className="text-xs font-medium text-red-500">{errors.email.message}</span>
-          ) : null}
+          {errors.email && (
+            <span className="text-xs font-medium text-red-500">
+              {errors.email.message}
+            </span>
+          )}
         </label>
 
-        <label className="flex flex-col gap-2 md:col-span-2">
-          <span className="text-sm font-semibold text-(--text-secondary)">Programa de interés</span>
+        <label className="flex flex-col gap-2 sm:col-span-2">
+          <span className="text-sm font-semibold text-(--text-secondary)">
+            Programa de interés
+          </span>
           <select
-            className="rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
+            className="w-full rounded-xl border border-(--border-subtle) bg-(--bg-elevated) px-4 py-3 text-sm text-(--text-primary) outline-none transition focus:border-(--accent) focus:ring-2 focus:ring-(--accent)/20"
             {...register("programInterest")}
           >
             <option value="" disabled>
@@ -115,20 +132,26 @@ export const LeadForm = ({ programOptions, selectedProgram }: LeadFormProps) => 
               </option>
             ))}
           </select>
-          {errors.programInterest ? (
-            <span className="text-xs font-medium text-red-500">{errors.programInterest.message}</span>
-          ) : null}
+
+          {errors.programInterest && (
+            <span className="text-xs font-medium text-red-500">
+              {errors.programInterest.message}
+            </span>
+          )}
         </label>
 
-        <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3 pt-2">
+        <div className="sm:col-span-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
           <p className="text-sm text-(--text-muted)">
-            Leads guardados: <span className="font-semibold text-(--text-primary)">{leadCount}</span>
+            Leads guardados:{" "}
+            <span className="font-semibold text-(--text-primary)">
+              {leadCount}
+            </span>
           </p>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="rounded-xl bg-(--accent) px-5 py-3 text-sm font-semibold text-white transition hover:bg-(--accent-hover) disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-full sm:w-auto rounded-xl bg-(--accent) px-5 py-3 text-sm font-semibold text-white transition hover:bg-(--accent-hover) disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? "Guardando..." : "Registrar lead"}
           </button>
